@@ -7,6 +7,7 @@ interface buttonProps {
   disabled?: boolean;
   small?: boolean;
   outline?: boolean;
+  isHalf?: boolean;
   icon?: IconType;
 }
 const Button: React.FC<buttonProps> = ({
@@ -15,6 +16,8 @@ const Button: React.FC<buttonProps> = ({
   disabled,
   small,
   outline,
+  isHalf,
+  icon,
   icon: Icon,
 }) => {
   return (
@@ -26,7 +29,7 @@ const Button: React.FC<buttonProps> = ({
       }
       ${outline ? "border-blue" : "border-rose-500"}
       ${outline ? "text-black" : "text-white"}
-      
+      ${isHalf ? "w-1/2" : "w-full"}
       ${small ? "py-1" : "py-3"}
       ${small ? "text-sm" : "text-md"}
       ${small ? "font-light" : "font-semibold "}${

@@ -6,6 +6,7 @@ import ClientOnly from "./components/ClientOnly";
 import RegisterModal from "./components/modals/RegisterModal";
 import ToastProvider from "./components/providers/toastProvider";
 import LoginModal from "./components/modals/LoginModal";
+import getCurrentUser from "./actions/getCurerentUser";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +15,12 @@ export const metadata: Metadata = {
   description: "Generating for learning",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const currentUser = await getCurrentUser();
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -26,7 +28,7 @@ export default function RootLayout({
           <RegisterModal />
           <LoginModal />
           <ToastProvider />
-          <Navbar />
+          <Navbar currentUser={currentUser} />
         </ClientOnly>
         {children}
       </body>
