@@ -20,7 +20,7 @@ const RegisterModal = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      username: "",
+      name: "",
       email: "",
       password: "",
     },
@@ -92,7 +92,7 @@ const RegisterModal = () => {
           <div>Already have an account?</div>
           <div
             onClick={registerModal.onClose}
-            className="text-neutral-800 cursor-pointer hover:underline"
+            className="text-black cursor-pointer hover:underline"
           >
             Log in
           </div>
