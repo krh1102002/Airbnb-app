@@ -8,13 +8,15 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import userRegisterModal from "../hooks/userRegisterModal";
 import Modal from "./Modals";
 import Heading from "../Heading";
-import Input from "../Input";
+import Input from "../input/Input";
 import toast from "react-hot-toast";
 import Button from "../Button";
 import { signIn } from "next-auth/react";
+import userLoginModal from "../hooks/userLoginModal";
 const RegisterModal = () => {
   const registerModal = userRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
+  const loginModal = userLoginModal();
   const {
     register,
     handleSubmit,
@@ -26,6 +28,11 @@ const RegisterModal = () => {
       password: "",
     },
   });
+
+  const toggle = useCallback(() => {
+    registerModal.onClose();
+    loginModal.onOpen();
+  }, [loginModal, registerModal]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -96,7 +103,7 @@ const RegisterModal = () => {
         <div className="flex justify-center flex-row items-center gap-1">
           <div>Already have an account?</div>
           <div
-            onClick={registerModal.onClose}
+            onClick={toggle}
             className="text-black font-medium cursor-pointer hover:underline"
           >
             Log in

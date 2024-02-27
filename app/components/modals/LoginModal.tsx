@@ -1,16 +1,15 @@
 "use client";
 
-import axios from "axios";
 import { signIn } from "next-auth/react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import userLoginModal from "../hooks/userLoginModal";
 import userRegisterModal from "../hooks/userRegisterModal";
 import Modal from "./Modals";
 import Heading from "../Heading";
-import Input from "../Input";
+import Input from "../input/Input";
 import toast from "react-hot-toast";
 import Button from "../Button";
 import { useRouter } from "next/navigation";
@@ -47,6 +46,11 @@ const LoginModal = () => {
       }
     });
   };
+
+  const toggle = useCallback(() => {
+    LoginModal.onClose();
+    registerModal.onOpen();
+  }, [LoginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -95,10 +99,10 @@ const LoginModal = () => {
         <div className="flex justify-center flex-row items-center gap-1">
           <div className="text-neutral-500">Don't have an account?</div>
           <div
-            onClick={LoginModal.onClose}
+            onClick={toggle}
             className="text-black font-medium cursor-pointer hover:underline"
           >
-            Sign up
+            Create an account
           </div>
         </div>
       </div>
