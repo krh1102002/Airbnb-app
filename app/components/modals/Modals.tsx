@@ -86,7 +86,7 @@ const Modal: React.FC<modelProps> = ({
               <div className="relative p-6 flex-auto">{body}</div>
               {/* FOOTER  */}
               <div className="flex flex-col  p-6">
-                <div className="flex flex-row items-center  w-full ">
+                <div className="flex flex-row items-center  w-full gap-3 ">
                   {secondaryAction && secondaryActionLabel && (
                     <Button
                       outline
