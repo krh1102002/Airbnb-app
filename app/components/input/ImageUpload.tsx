@@ -37,7 +37,7 @@ const ImageUpload: React.FC<ImageUploadprops> = ({ onChange, value }) => {
                 <Image
                   alt="Upload"
                   fill
-                  style={{ objectFit: "contain" }}
+                  style={{ objectFit: "contain", padding: "24px" }}
                   src={value}
                 />
               </div>

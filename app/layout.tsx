@@ -32,7 +32,7 @@ export default async function RootLayout({
           <ToastProvider />
           <Navbar currentUser={currentUser} />
         </ClientOnly>
-        {children}
+        <div className="pb-4 pt-4">{children}</div>
       </body>
     </html>
   );
