@@ -7,6 +7,7 @@ import { SafeUser } from "@/app/types";
 import { Listing, Reservation } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import HeartButton from "../HeartButton";
+import { Country } from "world-countries";
 
 interface ListingCardProps {
   data: Listing;
@@ -31,7 +32,6 @@ const ListingCard: React.FC<ListingCardProps> = ({
   const { getByValue } = useCountries();
 
   const location = getByValue(data.locationValue);
-
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
@@ -84,7 +84,9 @@ const ListingCard: React.FC<ListingCardProps> = ({
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
         </div>
-        d
+        <div className="font-semibold text-lg">
+          {location?.region} , {location?.label}
+        </div>
       </div>
     </div>
   );
