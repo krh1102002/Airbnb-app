@@ -6,6 +6,11 @@ import { IconType } from "react-icons";
 import useCountries from "../hooks/UseCountries";
 import Avatar from "../Avatar";
 import ListingCategory from "./ListingCategory";
+import dynamic from "next/dynamic";
+
+const Map = dynamic(() => import("../Map"), {
+  ssr: false,
+});
 
 interface ListingInfoProps {
   user: SafeUser | null;
@@ -36,7 +41,7 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
   const cordinates = getByValue(locationValue)?.latlng;
 
   return (
-    <div className="col-span-4 flex flex-col gap-8">
+    <div className="col-span-4 flex flex-col gap-6">
       <div className="flex flex-col gap-2">
         <div
           className="text-xl
@@ -65,6 +70,11 @@ const ListingInfo: React.FC<ListingInfoProps> = ({
           icon={category.icon}
         />
       )}
+
+      <hr />
+      <div className="text-lg font-light text-neutral-500 ">{description}</div>
+      <hr />
+      <Map center={cordinates} />
     </div>
   );
 };
