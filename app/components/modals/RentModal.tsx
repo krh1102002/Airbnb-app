@@ -91,7 +91,6 @@ const RentModal = () => {
         rentModal.onClose();
       })
       .catch(() => {
-        // rentModal.onClose();
         toast.error("something went wrong!");
       })
       .finally(() => {
@@ -101,7 +100,7 @@ const RentModal = () => {
 
   const Map = useMemo(
     () => dynamic(() => import("../Map"), { ssr: false }),
-    [location]
+    []
   );
 
   const setCustomValue = (id: string, value: any) => {

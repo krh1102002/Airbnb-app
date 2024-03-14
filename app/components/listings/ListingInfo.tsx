@@ -1,27 +1,27 @@
 "use client";
 
-import { SafeUser } from "@/app/types";
-import React from "react";
+import dynamic from "next/dynamic";
 import { IconType } from "react-icons";
-import useCountries from "../hooks/UseCountries";
+import { SafeUser } from "@/app/types";
+
 import Avatar from "../Avatar";
 import ListingCategory from "./ListingCategory";
-import dynamic from "next/dynamic";
+import useCountries from "../hooks/UseCountries";
 
 const Map = dynamic(() => import("../Map"), {
   ssr: false,
 });
 
 interface ListingInfoProps {
-  user: SafeUser | null;
+  user: SafeUser;
   description: string;
-  roomCount: number;
   guestCount: number;
+  roomCount: number;
   bathroomCount: number;
   category:
     | {
-        label: string;
         icon: IconType;
+        label: string;
         description: string;
       }
     | undefined;
@@ -31,50 +31,64 @@ interface ListingInfoProps {
 const ListingInfo: React.FC<ListingInfoProps> = ({
   user,
   description,
-  roomCount,
   guestCount,
+  roomCount,
   bathroomCount,
   category,
   locationValue,
 }) => {
   const { getByValue } = useCountries();
-  const cordinates = getByValue(locationValue)?.latlng;
+
+  const coordinates = getByValue(locationValue)?.latlng;
 
   return (
-    <div className="col-span-4 flex flex-col gap-6">
+    <div className="col-span-4 flex flex-col gap-8">
       <div className="flex flex-col gap-2">
         <div
-          className="text-xl
-    font-semibold
-    flex
-    flex-row
-    items-center
-    gap-2
-    "
+          className="
+            text-xl 
+            font-semibold 
+            flex 
+            flex-row 
+            items-center
+            gap-2
+          "
         >
           <div>Hosted by {user?.name}</div>
           <Avatar src={user?.image} />
         </div>
-        <div className="flex flex-row items-center text-neutral-500 gap-4 font-light">
+        <div
+          className="
+            flex 
+            flex-row 
+            items-center 
+            gap-4 
+            font-light
+            text-neutral-500
+          "
+        >
           <div>{guestCount} guests</div>
           <div>{roomCount} rooms</div>
           <div>{bathroomCount} bathrooms</div>
         </div>
       </div>
       <hr />
-
       {category && (
         <ListingCategory
-          label={category.label}
-          description={category.description}
           icon={category.icon}
+          label={category?.label}
+          description={category?.description}
         />
       )}
-
       <hr />
-      <div className="text-lg font-light text-neutral-500 ">{description}</div>
+      <div
+        className="
+      text-lg font-light text-neutral-500"
+      >
+        {description}
+      </div>
       <hr />
-      <Map center={cordinates} />
+      <Map center={coordinates} />
     </div>
   );
 };
