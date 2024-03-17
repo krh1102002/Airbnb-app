@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 html,
-body:root {
+body,
+:root {
   height: 100%;
 }
 
@@ -19,6 +20,6 @@ body:root {
 }
 
 .rdrCalendarWrapper {
-  width: 100% !important;
   font-size: 16px !important;
+  width: 100% !important;
 }

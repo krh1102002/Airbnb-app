@@ -1,50 +1,56 @@
-import EmptyState from "./EmptyState";
-import getCurrentUser from "./actions/getCurerentUser";
-import getListing from "./actions/getListing";
-import ClientOnly from "./components/ClientOnly";
-import Container from "./components/Container";
-import ListingCard from "./components/listings/listingCard";
+import Container from "@/app/components/Container";
+import ListingCard from "@/app/components/listings/ListingCard";
+import EmptyState from "@/app/components/EmptyState";
 
-export default async function Home() {
-  const isEmpty = true;
+import getListings, { 
+  IListingsParams
+} from "@/app/actions/getListings";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import ClientOnly from "./components/ClientOnly";
+
+interface HomeProps {
+  searchParams: IListingsParams
+};
+
+const Home = async ({ searchParams }: HomeProps) => {
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
-  const listing = await getListing();
-  if (listing.length === 0) {
+
+  if (listings.length === 0) {
     return (
       <ClientOnly>
-        <Container>
-          <EmptyState showReset />
-        </Container>
+        <EmptyState showReset />
       </ClientOnly>
     );
   }
+
   return (
     <ClientOnly>
       <Container>
-        <div
+        <div 
           className="
-    pt-8
-    grid
-    grid-cols-1
-    sm:grid-cols-2
-    md:grid-cols-3
-    lg:grid-cols-4
-    xl:grid-cols-5
-    2xl:grid-cols-6
-    gap:8
-    "
+            pt-24
+            grid 
+            grid-cols-1 
+            sm:grid-cols-2 
+            md:grid-cols-3 
+            lg:grid-cols-4
+            xl:grid-cols-5
+            2xl:grid-cols-6
+            gap-8
+          "
         >
-          {listing.map((list) => {
-            return (
-              <ListingCard
-                data={list}
-                currentUser={currentUser}
-                key={list.id}
-              />
-            );
-          })}
+          {listings.map((listing: any) => (
+            <ListingCard
+              currentUser={currentUser}
+              key={listing.id}
+              data={listing}
+            />
+          ))}
         </div>
       </Container>
     </ClientOnly>
-  );
+  )
 }
+
+export default Home;

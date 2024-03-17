@@ -1,19 +1,19 @@
-import getCurrentUser from "@/app/actions/getCurerentUser";
-import prisma from "@/app/libs/prismadb";
 import { NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+import prisma from "@/app/libs/prismadb";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+
+export async function POST(
+  request: Request, 
+) {
   const currentUser = await getCurrentUser();
-  console.log("===currentUser", currentUser);
 
   if (!currentUser) {
     return NextResponse.error();
   }
 
   const body = await request.json();
-  console.log("===body", body);
-
-  const {
+  const { 
     title,
     description,
     imageSrc,
@@ -23,26 +23,28 @@ export async function POST(request: Request) {
     guestCount,
     location,
     price,
-  } = body;
+   } = body;
 
-  try {
-    const listing = await prisma.listing.create({
-      data: {
-        title,
-        description,
-        imageSrc,
-        category,
-        roomCount,
-        bathroomCount,
-        guestCount,
-        locationValue: location.value,
-        price: parseInt(price, 10),
-        userId: currentUser.id,
-      },
-    });
-    return NextResponse.json(listing);
-  } catch (error) {
-    console.error("Prisma Error:", error);
-    return NextResponse.error();
-  }
+  Object.keys(body).forEach((value: any) => {
+    if (!body[value]) {
+      NextResponse.error();
+    }
+  });
+
+  const listing = await prisma.listing.create({
+    data: {
+      title,
+      description,
+      imageSrc,
+      category,
+      roomCount,
+      bathroomCount,
+      guestCount,
+      locationValue: location.value,
+      price: parseInt(price, 10),
+      userId: currentUser.id
+    }
+  });
+
+  return NextResponse.json(listing);
 }
