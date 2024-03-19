@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { SafeReservation, SafeUser } from "@/app/types";
 import Heading from "@/app/components/Heading";
 import Container from "@/app/components/Container";
-import ListingCard from "@/app/components/listings/ListingCard";
+import ListingCard from "../components/listings/ListingCard";
 
 interface ReservationsClientProps {
   reservations: SafeReservation[];
