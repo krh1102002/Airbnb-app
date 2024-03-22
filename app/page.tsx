@@ -1,18 +1,4 @@
 import Container from "@/app/components/Container";
-<<<<<<< HEAD
-import ListingCard from "@/app/components/listings/ListingCard";
-import EmptyState from "@/app/components/EmptyState";
-
-import getListings, { 
-  IListingsParams
-} from "@/app/actions/getListings";
-import getCurrentUser from "@/app/actions/getCurrentUser";
-import ClientOnly from "./components/ClientOnly";
-
-interface HomeProps {
-  searchParams: IListingsParams
-};
-=======
 import EmptyState from "@/app/components/EmptyState";
 
 import getListings, { IListingsParams } from "@/app/actions/getListings";
@@ -23,7 +9,6 @@ import ListingCard from "./components/listings/listingCard";
 interface HomeProps {
   searchParams: IListingsParams;
 }
->>>>>>> 7264c7c6919375d18f9fd8c98685243ca62fd08b
 
 const Home = async ({ searchParams }: HomeProps) => {
   const listings = await getListings(searchParams);
@@ -40,11 +25,7 @@ const Home = async ({ searchParams }: HomeProps) => {
   return (
     <ClientOnly>
       <Container>
-<<<<<<< HEAD
-        <div 
-=======
         <div
->>>>>>> 7264c7c6919375d18f9fd8c98685243ca62fd08b
           className="
             pt-24
             grid 
@@ -67,12 +48,7 @@ const Home = async ({ searchParams }: HomeProps) => {
         </div>
       </Container>
     </ClientOnly>
-<<<<<<< HEAD
-  )
-}
-=======
   );
 };
->>>>>>> 7264c7c6919375d18f9fd8c98685243ca62fd08b
 
 export default Home;
