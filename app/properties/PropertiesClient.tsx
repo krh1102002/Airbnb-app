@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 'use client';
+=======
+"use client";
+>>>>>>> 7264c7c6919375d18f9fd8c98685243ca62fd08b
 
 import { toast } from "react-hot-toast";
 import axios from "axios";
@@ -9,15 +13,24 @@ import { SafeListing, SafeUser } from "@/app/types";
 
 import Heading from "@/app/components/Heading";
 import Container from "@/app/components/Container";
+<<<<<<< HEAD
 import ListingCard from "@/app/components/listings/ListingCard";
 
 interface PropertiesClientProps {
   listings: SafeListing[],
   currentUser?: SafeUser | null,
+=======
+import ListingCard from "../components/listings/listingCard";
+
+interface PropertiesClientProps {
+  listings: SafeListing[];
+  currentUser?: SafeUser | null;
+>>>>>>> 7264c7c6919375d18f9fd8c98685243ca62fd08b
 }
 
 const PropertiesClient: React.FC<PropertiesClientProps> = ({
   listings,
+<<<<<<< HEAD
   currentUser
 }) => {
   const router = useRouter();
@@ -47,6 +60,37 @@ const PropertiesClient: React.FC<PropertiesClientProps> = ({
         subtitle="List of your properties"
       />
       <div 
+=======
+  currentUser,
+}) => {
+  const router = useRouter();
+  const [deletingId, setDeletingId] = useState("");
+
+  const onDelete = useCallback(
+    (id: string) => {
+      setDeletingId(id);
+
+      axios
+        .delete(`/api/listings/${id}`)
+        .then(() => {
+          toast.success("Listing deleted");
+          router.refresh();
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.error);
+        })
+        .finally(() => {
+          setDeletingId("");
+        });
+    },
+    [router]
+  );
+
+  return (
+    <Container>
+      <Heading title="Properties" subtitle="List of your properties" />
+      <div
+>>>>>>> 7264c7c6919375d18f9fd8c98685243ca62fd08b
         className="
           mt-10
           grid 
@@ -72,7 +116,14 @@ const PropertiesClient: React.FC<PropertiesClientProps> = ({
         ))}
       </div>
     </Container>
+<<<<<<< HEAD
    );
 }
  
 export default PropertiesClient;
+=======
+  );
+};
+
+export default PropertiesClient;
+>>>>>>> 7264c7c6919375d18f9fd8c98685243ca62fd08b

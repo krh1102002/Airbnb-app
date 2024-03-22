@@ -1,0 +1,12 @@
+diff --git a/node_modules/world-countries/index.d.ts b/node_modules/world-countries/index.d.ts
+index 55f7f2d..ef5ef35 100644
+--- a/node_modules/world-countries/index.d.ts
++++ b/node_modules/world-countries/index.d.ts
+@@ -42,7 +42,6 @@ export interface Country {
+   languages: { [languageCode: string]: string }
+   translations: { [languageCode: string]: OfficialAndCommon }
+   latlng: [number, number]
+-  demonyms: { [languageCode: string]?: Demonyms }
+   landlocked: boolean
+   borders: string[]
+   area: number
